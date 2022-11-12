@@ -28,3 +28,13 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+def cook_recipe(request,recipes):
+    rec=DATA.get(recipes)
+    ing = request.GET.get('servings',1)
+    sum_ing ={}
+    for key,value in rec.items():
+        sum_ing[key]= value * int(ing)
+    context = {
+            'recipe':sum_ing
+    }
+    return render(request, 'calculator/index.html',context)
